@@ -12,7 +12,7 @@ layout = [
     [sg.Button("7", size=(4,3)), sg.Button("8", size=(4,3)), sg.Button("9", size=(4,3)), sg.Button("/", size=(4,3))],
     [sg.Button("4", size=(4,3)), sg.Button("5", size=(4,3)), sg.Button("6", size=(4,3)), sg.Button("*", size=(4,3))],
     [sg.Button("1", size=(4,3)), sg.Button("2", size=(4,3)), sg.Button("3", size=(4,3)), sg.Button("-", size=(4,3))],
-    [sg.Button("", size=(4,3)), sg.Button("0", size=(4,3)), sg.Button(".", size=(4,3)), sg.Button("+", size=(4,3))],
+    [sg.Button("test", size=(4,3)), sg.Button("0", size=(4,3)), sg.Button(".", size=(4,3)), sg.Button("+", size=(4,3))],
     [sg.Button("=", size=(8,3))],
     [sg.Button("exit", size=(4,3))],
 ]
@@ -25,7 +25,7 @@ def updateResult(windowResult, appendValue):
 def printResult(windowResult):
     #If the math expression does not have Square Root or Power, it only use the
     #eval to calculate and update the Text bar, else it resolve calculation of 
-    # the sqrt and pow, and replace the result in the mathExpression variable
+    #the sqrt and pow, and replace the result in the mathExpression variable
     mathExpression = windowResult.get()
     if "√" in mathExpression:
         sqrtPattern = "\√\d+"
@@ -55,6 +55,7 @@ def printResult(windowResult):
 
 while True:
     event, value = window.read()
+
     if event in (sg.WIN_CLOSED, "exit"):
         break
     elif event == "C":
