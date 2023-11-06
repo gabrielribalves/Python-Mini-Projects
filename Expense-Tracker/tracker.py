@@ -56,10 +56,22 @@ if args[0] == "addExpense":
 
     addExpense(args[1], category, args[2])
 elif args[0] == "addCategory":
-    trackerDB.insertCategory(args[1])
+    try:
+        trackerDB.insertCategory(args[1])
+    except IndexError as e:
+        print("You need to type the name of the category")
+        sys.exit()
 elif args[0] == "delExpense":
+    expenseLen = len(trackerDB.selectAll("tracker"))
+    if int(args[1]) <= 0 or int(args[1]) > expenseLen:
+        print("This expense don\'t exist ")
+        sys.exit()
     trackerDB.deleteRow("tracker", args[1])
 elif args[0] == "delCategory":
+    categoryLen = len(trackerDB.selectAll("category"))
+    if int(args[1]) <= 0 or int(args[1]) > categoryLen:
+        print("This category don\'t exist ")
+        sys.exit()
     trackerDB.deleteRow("category", args[1])
 elif args[0] == "displayBalance":
     print(trackerDB.selectAll('balance')[0][0])
@@ -70,8 +82,12 @@ elif args[0] == "displayExpense":
 
     for header in headers:
         table.add_column(header, style="magenta")
-    
+
     for row in trackerList:
-        table.add_row(str(row[0]), row[1], row[2], str(row[3]), str(row[4]))
+        idTracker, date, category, value, balance = row
+        table.add_row(str(idTracker), date, category, str(value), str(balance))
     console = Console()
     console.print(table)
+else:
+    print("Invalid command!")
+    print("You can use only this options: addCategory, delExpense, delCategory, displayBalance and displayExpense")

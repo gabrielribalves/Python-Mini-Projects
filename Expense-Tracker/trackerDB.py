@@ -59,7 +59,7 @@ def updateBalance(value:int) -> None:
     con.execute(instruction)
     con.commit()
 
-def selectAll(table) -> list:
+def selectAll(table:str) -> list:
     con = sqlite3.connect("tracker.db")
     instruction = f"SELECT * FROM {table};"
 
